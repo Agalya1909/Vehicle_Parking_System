@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'Caviar Dreams';
+    src: url('../fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Caviar Dreams', sans-serif;
+    background: url('../images/image.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #F5F4F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Login Box with transparency and blur */
+.login-box {
+    background-color: rgba(14, 14, 14, 0.879); /* dark with opacity */
+    backdrop-filter: blur(2px);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 60px  rgba(219, 216, 216, 0.45);
+    width: 400px;
+    border: 1px solid #cac1c3;
+    text-align: center;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+/* Heading */
+.login-box h2 {
+    margin-bottom: 20px;
+    margin-top: 11px;
+    font-size: 28px;
+    color: #F5F4F5;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+/* Inputs */
+.login-box input[type="email"],
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 90%;
+    padding: 13px;
+    margin: 11px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #F5F4F5;
+    color: #242024;
+    font-size: 17px;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+.login-box input::placeholder {
+    color: #999999;
+    font-size: 15px;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+/* Button */
+.login-box button {
+    width: 80%;
+    padding: 13px;
+    margin-top: 21px;
+    background-color: #E30229;
+    color: #F5F4F5;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+.login-box button:hover {
+    background-color: #BF0400;
+}
+
+/* Footer */
+.footer-text {
+    margin-top: 18px;
+    font-size: 16px;
+    color: #DDDDDD;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+.footer-text a {
+    color: #E30229;
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'Caviar Dreams';
+    src: url('../fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Caviar Dreams', sans-serif;
+    background: url('../images/image.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #F5F4F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    background-color: rgba(14, 14, 14, 0.88);
+    backdrop-filter: blur(2px);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 60px rgba(219, 216, 216, 0.45);
+    width: 900px;
+    border: 1px solid #cac1c3;
+    text-align: center;
+}
+
+.search-box h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+.search-box form {
+    margin-bottom: 25px;
+}
+
+.search-box input[type="text"] {
+    padding: 12px;
+    width: 65%;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    font-family: 'Caviar Dreams';
+    font-size: 16px;
+    background-color: #F5F4F5;
+    color: #242024;
+}
+
+.search-box button {
+    padding: 12px 20px;
+    background-color: #E30229;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #BF0400;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #F5F4F5;
+}
+
+table th {
+    background-color: #E30229;
+    color: white;
+}
+
+table td {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.no-results {
+    margin-top: 20px;
+    color: #f88;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 16px;
+    color: #E30229;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}

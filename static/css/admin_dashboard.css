@@ -1,0 +1,304 @@
+@font-face {
+    font-family: 'Caviar Dreams';
+    src: url('../fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Caviar Dreams', sans-serif;
+    background: url('../images/image.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #F5F4F5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    background-color: rgba(14, 14, 14, 0.879);
+    backdrop-filter: blur(3px);
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 1200px;
+    border: 1px solid #cac1c3;
+    box-shadow: 0 0 60px rgba(219, 216, 216, 0.45);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-family: 'Caviar Dreams', sans-serif;
+
+}
+
+.welcome {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: #F5F4F5;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #e30229;
+}
+
+.nav-links .edit-profile {
+    color: #89e1f5;
+}
+
+.section h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.lot-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.lot-card {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+    width: 250px;
+    border: 1px solid #aaa;
+}
+
+.lot-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.lot-header a {
+    color: #dc9850;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.lot-header a:hover {
+    color: #ffd79c;
+}
+
+.lot-header .delete-link {
+    color: #ff7f7f;
+}
+
+.lot-title {
+    font-weight: bold;
+    color: #f0f08a;
+}
+
+.occupancy {
+    font-size: 15px;
+    color: #90f7aa;
+    margin-bottom: 10px;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 30px);
+    gap: 8px;
+}
+
+.slot {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+.occupied {
+    background-color: #f87d7d;
+    color: #111;
+}
+
+.available {
+    background-color: #7df89f;
+    color: #111;
+    border: 1px solid #ccc;
+}
+
+.add-lot-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.add-lot-btn {
+    background-color: #e30229;
+    padding: 12px 24px;
+    color: #f5f4f5;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Caviar Dreams', sans-serif;
+    border: none;
+}
+
+.add-lot-btn:hover {
+    background-color: #bf0400;
+}
+
+/* Buttons and Form Controls */
+button,
+input[type="submit"],
+input[type="button"] {
+    background-color: #e30229;
+    color: #f5f4f5;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: 'Caviar Dreams', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #bf0400;
+}
+
+/* Modal Styling */
+
+   
+    .modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.532) !important;
+    z-index: 1040;
+}
+
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    font-family: 'Caviar Dreams', sans-serif;
+    color: white;
+     background-color: rgba(0, 0, 0, 0.532) !important;
+}
+
+/* Tables */
+.table th,
+.table td {
+    font-family: 'Caviar Dreams', sans-serif;
+    color: #f5f5f5;
+}
+
+/* Fix modal overlay */
+.modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.888)!important;;
+    z-index: 999!important;;
+}
+
+/* Modal container */
+/* === Matching User Dashboard Modal Styling === */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.modal-content {
+    background-color:  #1a1a1a !important;
+    backdrop-filter: blur(6px) !important;
+    border: 1px solid #cac1c3 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1) !important;
+    color: #F5F4F5 !important;
+    font-family: 'Caviar Dreams', sans-serif !important;
+}
+
+
+.modal-header {
+    background: transparent !important;
+    border: none !important;
+    padding-bottom: 0 !important;
+}
+
+.modal-title {
+    font-size: 22px !important;
+    font-weight: bold !important;
+    color: #E30229 !important;
+    text-align: center !important;
+    width: 100% !important;
+    font-family: 'Caviar Dreams', sans-serif !important;
+}
+
+.modal-footer {
+    background: transparent !important;
+    border: none !important;
+}
+
+
+
+.modal-body label,
+.modal-body p {
+    color: #F5F4F5 !important; 
+    font-size: 18px !important;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    color: #F5F4F5 !important;
+    border: 1px solid #999 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    width: 100% !important;
+    font-family: 'Caviar Dreams', sans-serif !important;
+    margin-bottom: 15px !important;
+}
+
+.modal-body input::placeholder,
+.modal-body textarea::placeholder {
+    color: #ccc !important;
+    opacity: 0.7 !important;
+}
+
+/* Buttons inside modals */
+.modal-footer .btn,
+.modal-content .btn {
+    background-color: #E30229 !important;
+    color: #F5F4F5 !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    font-family: 'Caviar Dreams', sans-serif !important;
+    margin: 0 3px !important;
+}
+
+.modal-footer .btn:hover,
+.modal-content .btn:hover {
+    background-color: #BF0400 !important;
+}
+
+/* Close button styling */
+.modal-header .close {
+    color: #F5F4F5;
+    font-size: 26px;
+    font-weight: bold;
+    opacity: 1;
+}
+
+.modal-header .close:hover {
+    color: #E30229;
+}
+

@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Caviar Dreams';
+    src: url('../fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Caviar Dreams', sans-serif;
+    background: url('../images/image.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #F5F4F5;
+}
+
+.profile-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-box {
+    background-color: rgba(14, 14, 14, 0.88);
+    backdrop-filter: blur(2px);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 60px rgba(219, 216, 216, 0.45);
+    width: 400px;
+    border: 1px solid #cac1c3;
+    text-align: center;
+}
+
+.profile-box h2 {
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+
+.profile-box label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.profile-box input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #F5F4F5;
+    color: #242024;
+    font-size: 16px;
+}
+
+.profile-box button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    background-color: #E30229;
+    color: #F5F4F5;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-box button:hover {
+    background-color: #BF0400;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    color: #E30229;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}

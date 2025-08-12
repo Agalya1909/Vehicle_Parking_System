@@ -1,0 +1,204 @@
+@font-face {
+    font-family: 'Caviar Dreams';
+    src: url('../fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+}
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Caviar Dreams', sans-serif;
+            background: url('/static/images/image.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #F5F4F5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(14, 14, 14, 0.85);
+            backdrop-filter: blur(3px);
+            border-radius: 16px;
+            box-shadow: 0 0 60px rgba(219, 216, 216, 0.45);
+            border: 1px solid #cac1c3;
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .welcome {
+            font-size: 22px;
+            color: #F5F4F5;
+        }
+
+        .nav-links a {
+            color: #F5F4F5;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #E30229;
+        }
+
+        h2 {
+            color: #F5F4F5;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ffffffb2;
+            color: #F5F4F5;
+        }
+
+        .release-btn, .book-btn {
+            background-color: #E30229;
+            color: #F5F4F5;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Caviar Dreams', sans-serif;
+        }
+
+        .release-btn:hover, .book-btn:hover {
+            background-color: #BF0400;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border-radius: 8px;
+            border: none;
+            margin-right: 10px;
+            font-family: 'Caviar Dreams', sans-serif;
+        }
+
+        button[type="submit"] {
+            background-color: #E30229;
+            color: #F5F4F5;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #BF0400;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.449);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #999;
+            width: 400px;
+            color: white;
+            font-family: 'Caviar Dreams', sans-serif;
+        }
+
+        .modal-content h2 {
+            color: #E30229;
+            text-align: center;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        .modal-content input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 5px;
+            border: none;
+            font-family: 'Caviar Dreams', sans-serif;
+            margin-left: 8px;
+        }
+
+        .modal-content button {
+            margin-top: 30px;
+            width: 85%;
+            padding: 10px;
+            background-color: #E30229;
+            color: #F5F4F5;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 27px;  
+            margin-bottom: 5px;
+        }
+
+        .modal-content button:hover {
+            background-color: #BF0400;
+        }
+
+        .close-btn {
+            color: white;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Centered Search Section */
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.search-section form {
+    max-width: 500px;
+    width: 100%;
+    font-size: 25px;
+}
