@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Parking Lots</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        @font-face {
+            font-family: 'Caviar Dreams';
+            src: url('../static/fonts/caviar_dreams/CaviarDreams.ttf') format('truetype');
+        }
+
+        body {
+            background: url('../static/images/image.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Caviar Dreams', sans-serif;
+            color: #F5F4F5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: rgba(14, 14, 14, 0.85);
+            backdrop-filter: blur(3px);
+            border-radius: 16px;
+            border: 1px solid #cac1c3;
+            padding: 30px;
+            box-shadow: 0 0 60px rgba(219, 216, 216, 0.45);
+        }
+
+        h2 {
+            color: #6db4f8;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Caviar Dreams', sans-serif;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #E30229;
+            color: #F5F4F5;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Caviar Dreams', sans-serif;
+        }
+
+        button:hover {
+            background-color: #BF0400;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ffffffb2;
+            color: #F5F4F5;
+        }
+
+        .no-results {
+            color: #f8d7da;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            display: inline-block;
+            background-color: #555;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: #444;
+        }
+
+        
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-family: 'Caviar Dreams', sans-serif;
+}
+.welcome {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: #F5F4F5;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #e30229;
+}
+
+.nav-links .edit-profile {
+    color: #89e1f5;
+}
+
+.section h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <div class="dashboard-header d-flex justify-content-between">
+        <div class="welcome font-weight-bold text-success">Welcome to Admin Dashboard</div>
+        <div class="nav-links">
+            <a href="{{ url_for('admin_dashboard') }}">Home</a> |
+            <a href="{{ url_for('view_users') }}">Users</a> |
+            <a href="{{ url_for('search_parking_lots') }}">Search</a> |
+            <a href="{{ url_for('summary_page') }}">Summary</a> |
+            <a href="{{ url_for('admin_login') }}">Logout</a> |
+            <a href="#" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
+        </div>
+    </div>
+        <h2>Search Parking Lots</h2>
+
+        <form method="POST" action="{{ url_for('search_parking_lots') }}" style="margin-left:210px">
+            <input type="text" name="search_query" placeholder="Search by ID, Location, or Pincode" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if parking_lots %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Address</th>
+                    <th>Pincode</th>
+                    <th>Price</th>
+                    <th>Spots</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lot in parking_lots %}
+                <tr>
+                    <td>{{ lot.id }}</td>
+                    <td>{{ lot.prime_location_name }}</td>
+                    <td>{{ lot.address }}</td>
+                    <td>{{ lot.pin_code }}</td>
+                    <td>{{ lot.price }}</td>
+                    <td>{{ lot.maximum_number_of_spots }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% elif parking_lots is not none %}
+        <p class="no-results">No matching parking lots found.</p>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
