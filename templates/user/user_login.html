@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>User Login</h2>
+            <form action="/user_login" method="POST">
+                <input type="text" name="username" placeholder="Enter your username" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
+                    <button type="submit">Login</button>
+            </form>
+            <div class="footer-text">
+                Don't have an account? <a href="{{ url_for('user_register') }}">Register</a>
+            </div>
+        </div>
+    </div>
+    {% if error %}
+    <script>
+        alert("{{ error }}");
+    </script>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .section {
+            margin-top: 40px;
+        }
+
+        .chart-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-section h2 {
+            font-family: 'Caviar Dreams', sans-serif;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .chart-box {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+        }
+
+        canvas {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="welcome">Welcome, {{ user.full_name }}</div>
+            <div class="nav-links">
+                <a href="{{ url_for('user_dashboard') }}">Home</a>
+                <a href="{{ url_for('user_summary') }}">Summary</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+                <a href="#" onclick="openModal()">Edit Profile</a>
+            </div>
+        </div>
+
+        <div class="section chart-section">
+            <h2>Parking Summary Chart</h2>
+            <div class="chart-box">
+                <canvas id="bookingChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Edit Profile</h2>
+            <form method="POST" action="{{ url_for('user_edit_profile') }}">
+                <label>Full Name:</label>
+                <input type="text" name="full_name" value="{{ user.full_name }}" required>
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ user.email }}" required>
+                <label>Password:</label>
+                <input type="password" name="password" value="{{ user.password }}" required>
+                <label>Address:</label>
+                <input type="text" name="address" value="{{ user.address }}" required>
+                <label>Pincode:</label>
+                <input type="text" name="pincode" value="{{ user.pincode }}" required>
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('bookingChart').getContext('2d');
+        const bookingChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ lot_labels|tojson }},
+                datasets: [{
+                    label: 'Bookings',
+                    data: {{ lot_counts|tojson }},
+                    backgroundColor: 'rgba(255, 0, 0, 0.85)',
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#ffffff'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                }
+            }
+        });
+
+                function openModal() {
+            document.getElementById("editProfileModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("editProfileModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains("modal")) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

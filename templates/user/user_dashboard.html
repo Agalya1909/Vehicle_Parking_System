@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="welcome">Welcome, {{ user.full_name }}</div>
+            <div class="nav-links">
+                <a href="{{ url_for('user_dashboard') }}">Home</a>
+                <a href="{{ url_for('user_summary') }}">Summary</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+                <a href="#" onclick="openModal()">Edit Profile</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Recent Parking History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Location</th>
+                        <th>Vehicle No</th>
+                        <th>Timestamp</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in parking_history %}
+                    <tr>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.location }}</td>
+                        <td>{{ booking.vehicle_no }}</td>
+                        <td>{{ booking.timestamp }}</td>
+                        <td>
+                            {% if booking.active %}
+                                <button type="button" class="release-btn" onclick='openReleaseModal({{ booking | tojson | safe }})'>Release</button>
+                            {% else %}
+                            <span style="color:#ccc;">Parked Out</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section search-section">
+            <form method="GET" action="{{ url_for('search_parking') }}">
+                <label for="search">Search parking @location/pin code:</label><br><br>
+                <input type="text" name="query" id="search" placeholder="Dubai Main Road">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        {% if search_results %}
+        <div class="section">
+            <h2>Parking Lots @ {{ query }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Location</th>
+                        <th>Address</th>
+                        <th>Availability</th>
+                        <th>Cost</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lot in search_results %}
+                    <tr>
+                        <td>{{ lot.id }}</td>
+                        <td>{{ lot.prime_location_name }}</td>
+                        <td>{{ lot.address }}</td>
+                        <td>{{ lot.availability }}</td>
+                        <td>{{ lot.price }}</td>
+                        <td>
+                            <button type="button" onclick='openBookModal({{ lot.id }}, {{ lot.available_spots | tojson }}, {{ user.id }})' class="book-btn">Book</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Edit Profile</h2>
+            <form method="POST" action="{{ url_for('user_edit_profile') }}">
+                <label>Full Name:</label>
+                <input type="text" name="full_name" value="{{ user.full_name }}" required>
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ user.email }}" required>
+                <label>Password:</label>
+                <input type="password" name="password" value="{{ user.password }}" required>
+                <label>Address:</label>
+                <input type="text" name="address" value="{{ user.address }}" required>
+                <label>Pincode:</label>
+                <input type="text" name="pincode" value="{{ user.pincode }}" required>
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeBookModal()">&times;</span>
+            <h2>Book a Parking Spot</h2>
+            <form method="POST" id="bookForm" action="">
+                <label for="book_spot_id">Choose Spot ID:</label>
+<select name="spot_id" id="book_spot_id" required>
+    <!-- options will be filled dynamically -->
+</select>
+                <label for="book_lot_id">Lot ID:</label>
+                <input type="text" name="lot_id" id="book_lot_id" readonly>
+                <label for="book_user_id">User ID:</label>
+                <input type="text" name="user_id" id="book_user_id" readonly>
+                <label for="book_vehicle_no">Vehicle Number:</label>
+                <input type="text" name="vehicle_no" id="book_vehicle_no" placeholder="Enter vehicle number" required>
+                <button type="submit">Reserve</button>
+                <button type="button" onclick="closeBookModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Release Modal -->
+    <div id="releaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReleaseModal()">&times;</span>
+            <h2>Release the Parking Spot</h2>
+            <form method="POST" id="releaseForm" action="">
+                <label for="spot_id">Spot ID:</label>
+                <input type="text" name="spot_id" id="spot_id" readonly>
+                <label for="vehicle_no">Vehicle Number:</label>
+                <input type="text" name="vehicle_no" id="vehicle_no" readonly>
+                <label for="parking_time">Parking Time:</label>
+                <input type="text" name="parking_time" id="parking_time" readonly>
+                <label for="releasing_time">Releasing Time:</label>
+                <input type="text" name="releasing_time" id="releasing_time" readonly>
+                <label for="cost">Total Cost:</label>
+                <input type="text" name="cost" id="cost" readonly>
+                <button type="submit">Release</button>
+                <button type="button" onclick="closeReleaseModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openReleaseModal(booking) {
+            document.getElementById("releaseForm").action = "/release_booking/" + booking.id;
+            document.getElementById("spot_id").value = booking.id;
+            document.getElementById("vehicle_no").value = booking.vehicle_no;
+            document.getElementById("parking_time").value = booking.timestamp;
+            document.getElementById("releasing_time").value = new Date().toLocaleString();
+
+            const parkingTime = new Date(booking.timestamp);
+            const now = new Date();
+            const diffMinutes = Math.ceil((now - parkingTime) / 60000);
+            const rate = booking.price || 20; // fallback price
+            const estimatedCost = Math.ceil(diffMinutes * rate / 60);
+
+            document.getElementById("cost").value = "₹" + estimatedCost;
+            document.getElementById("releaseModal").style.display = "block";
+        }
+
+        function closeReleaseModal() {
+            document.getElementById("releaseModal").style.display = "none";
+        }
+
+        function openBookModal(lotId, availableSpots, userId) {
+    document.getElementById("bookForm").action = "/book_lot/" + lotId;
+    document.getElementById("book_lot_id").value = lotId;
+    document.getElementById("book_user_id").value = userId;
+    document.getElementById("book_vehicle_no").value = "";
+
+    const spotSelect = document.getElementById("book_spot_id");
+    spotSelect.innerHTML = "";
+
+    availableSpots.forEach(function(spot) {
+        const option = document.createElement("option");
+        option.value = spot;
+        option.textContent = spot;
+        spotSelect.appendChild(option);
+    });
+
+    document.getElementById("bookModal").style.display = "block";
+}
+
+
+
+        function closeBookModal() {
+            document.getElementById("bookModal").style.display = "none";
+        }
+
+        function openModal() {
+            document.getElementById("editProfileModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("editProfileModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains("modal")) {
+                closeReleaseModal();
+                closeBookModal();
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

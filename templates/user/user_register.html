@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>User Register</h2>
+            <form method="POST" action="/user_register">
+                <input type="text" name="full_name" placeholder="Enter your full name" required>
+                <input type="text" name="address" placeholder="Enter your address" required>
+                <input type="text" name="pincode" placeholder="Enter your pincode" required pattern="\d{6}">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <button type="submit">Register</button>
+            </form>
+            <div class="footer-text">
+                Already have an account? <a href="{{ url_for('user_login') }}">Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

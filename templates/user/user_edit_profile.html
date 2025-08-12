@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: url("/static/images/parking_bg.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .nav-header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-header .title {
+            color: #00ff66;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-header .links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        .nav-header .links a:hover {
+            color: #ff3333;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 80px auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-container h2 {
+            color: #00ff66;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        form button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #ff3333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="title">Edit Profile - {{ user.full_name }}</div>
+        <div class="links">
+            <a href="{{ url_for('user_dashboard') }}">Home</a> |
+            <a href="{{ url_for('user_summary') }}">Summary</a> |
+            <a href="{{ url_for('user_login') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Update Your Details</h2>
+        <form method="POST">
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" value="{{ user.full_name }}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ user.email }}" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" value="{{ user.password }}" required>
+
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address" value="{{ user.address }}" required>
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" name="pincode" id="pincode" value="{{ user.pincode }}" required>
+
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+</body>
+</html>
